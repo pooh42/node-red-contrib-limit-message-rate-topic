@@ -9,7 +9,7 @@
     ],
     "repository": {
         "type": "git",
-        "url": "https://git.tu-berlin.de/manhau/node-red-contrib-limit-message-rate-topic"
+        "url": "https://github.com/pooh42/node-red-contrib-limit-message-rate-topic"
     },
     "author": "Manfred Hauswirth",
     "license": "ISC",

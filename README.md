@@ -39,4 +39,4 @@ Inspired and some code re-used from [node-red-contrib-delay-topic-message](https
 
 ## Repository
 
-[GitHub](https://git.tu-berlin.de/manhau/node-red-contrib-limit-message-rate-topic) - the nodes github repository
+[GitHub](https://github.com/pooh42/node-red-contrib-limit-message-rate-topic) - the nodes github repository
