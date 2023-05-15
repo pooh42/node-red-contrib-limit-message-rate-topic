@@ -1,4 +1,4 @@
-# Node-red node message-rate-topic
+# node-red-contrib-limit-message-rate-topic
 
 Limit the rate of `msg` with a specific `topic` to the set period.
 If a message with a specific topic is received, it is sent out immediately.
