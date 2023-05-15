@@ -1,0 +1,81 @@
+<script type="text/javascript">
+    RED.nodes.registerType('message-rate-topic', {
+        category: 'function',
+        color: '#62a969',
+        defaults: {
+            name: {value: ""},
+            period: {
+                value: 5,
+                required: true,
+                validate: RED.validators.number(),
+            },
+	    periodUnit: {value: "seconds"},
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: 'font-awesome/fa-tachometer',
+        label: function() {
+            return this.name || this.period + ' seconds period';
+        },
+	oneditprepare: function() {
+            // Set a default units of 'seconds' for existing nodes that don't have that field yet.
+            $('#node-input-periodUnit').val(this.periodUnit || "seconds");
+	}
+    });
+</script>
+
+<script type="text/html" data-template-name="message-rate-topic">
+    <div class="form-row">
+        <label for="node-input-period"><i class="fa fa-clock-o"></i> Period</label>
+        <input type="number" id="node-input-period" style="text-align:end; width:60px !important" placeholder="Period">
+        <select id="node-input-periodUnit" style="width:150px; !important">
+            <option value="milliseconds">milliseconds</option>
+            <option value="seconds">seconds</option>
+            <option value="minutes">minutes</option>
+            <option value="hours">hours</option>
+            <option value="days">days</option>
+        </select>
+    </div>
+<!--
+    <div class="form-tips"><b>Tip:</b> Number of seconds between 2 messages with same topic.</div>
+-->
+    <div class="form-row">
+        <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="message-rate-topic">
+    <p>Send only 1 message with a specific topic in the given period.</p>
+
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt>payload
+            <span class="property-type">string | buffer</span>
+        </dt>
+        <dd> the payload of the message. </dd>
+        <dt class="optional">topic <span class="property-type">string</span></dt>
+        <dd> the topic of the message.</dd>
+        <dt class="optional">period <span class="property-type">number</span></dt>
+        <dd> overrides default period (given in seconds).</dd>
+        <dt class="optional">stopTimer <span class="property-type">boolean</span></dt>
+        <dd> if set to <code>true</code>, the timer for <code>topic</code> is stopped and the message is discarded.</dd>
+        <dt class="optional">stopAll <span class="property-type">boolean</span></dt>
+        <dd> if set to <code>true</code>, all timers and messages, regardless of topic, are discarded.</dd>
+    </dl>
+
+    <h3>Details</h3>
+    <p>
+        Limit the rate of <code>msg</code> with a specific <code>topic</code> to the set period
+        in seconds. If a message with a specific topic is received, it is sent out immediately.
+        The next <code>msg</code> with the same <code>topic</code> will be sent only after the configured
+        <code>period</code> has passed. Messages with the same <code>topic</code> received in 
+        the configured time period are discarded.
+    </p>
+
+<h3>References</h3>
+    <ul>
+        <li><a href="https://git.tu-berlin.de/manhau/node-red-contrib-limit-message-rate-topic">GitHub</a> - the nodes github repository</li>
+        <li>Inspired and some code re-used from <a href="https://flows.nodered.org/node/node-red-contrib-delay-topic-message">node-red-contrib-delay-topic-message</a></li>
+    </ul>
+</script>
